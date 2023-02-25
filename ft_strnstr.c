@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:38:57 by oakerkao          #+#    #+#             */
-/*   Updated: 2022/10/25 14:56:36 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:54:15 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	j = 0;
+	if (!haystack || !needle)
+		return (0);
 	if (needle[0] == '\0')
 		return ((char *)(haystack));
 	if (len == 0)
