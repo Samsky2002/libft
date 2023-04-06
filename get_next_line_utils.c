@@ -6,37 +6,11 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:46:00 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/05 16:22:38 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:02:09 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strchr(char *s, int c)
-{
-	int				i;
-	unsigned char	*str;
-	unsigned char	k;
-
-	i = 0;
-	k = (unsigned char)c;
-	str = (unsigned char *)s;
-	while (str[i] != k && str[i])
-		i++;
-	if (str[i] == k)
-		return ((char *)(str + i));
-	return (0);
-}
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 char	*str_res(char *str1, char *str2)
 {
