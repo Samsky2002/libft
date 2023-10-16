@@ -6,68 +6,97 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:58:46 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/05 18:10:59 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:07:42 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	is_quote(char c)
+static int	count_word(char const *str, char c)
 {
-	if (c == '\'' || c == '"')
-		return (1);
-	return (0);
-}
+	int	i;
+	int	count;
 
-char	*join_char(char	*str, char c)
-{
-	int		i;
-	int		len;
-	char	*result;
-
-	len = 0;
 	i = 0;
-	if (str)
-		len = ft_strlen(str);
-	result = malloc(len + 2);	
-	while (str && str[i])
+	count = 0;
+	while (str[i])
 	{
-		result[i] = str[i];
-		i++;
-	}
-	result[i] = c;
-	result[i + 1] = '\0';
-	if (str)
-		free(str);
-	return (result);
-}
-
-t_list	*ft_split(char *str, char c)
-{
-	int		i;
-	int		quotes;
-	char	*result;
-	t_list	*lst;
-	
-	i = 0;
-	quotes = 0;
-	result = NULL;
-	lst	= NULL;
-	while (str && str[i])
-	{
-		if (is_quote(str[i]) && quotes == 0)
-			quotes = str[i];
-		else if (str[i] == quotes && quotes)
-			quotes = 0;
-		else if (quotes || (str[i] != c && quotes == 0))
-				result = join_char(result, str[i]);
-		if ((str[i] == c && quotes == 0 && result) || str[i + 1] == '\0')
+		while (str[i] == c && str[i])
+			i++;
+		if (str[i] != c && str[i])
 		{
-			ft_lstadd_back(&lst, ft_lstnew(result));
-			result = NULL;
+			while (str[i] != c && str[i])
+			{
+				i++;
+			}
+			count++;
 		}
+	}
+	return (count);
+}
+
+static int	count_char(char const *str, char c, int i)
+{
+	int	count;
+
+	count = 0;
+	while (str[i] != c && str[i])
+	{
+		i++;
+		count++;
+	}
+	return (count);
+}
+
+static void	cpy(char **str, char const *s, char c, int count)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	k = 0;
+	i = 0;
+	j = 0;
+	while (i < count)
+	{
+		j = 0;
+		while (s[k] == c && s[k])
+			k++;
+		while (s[k] != c && s[k])
+		{
+			str[i][j] = s[k];
+			k++;
+			j++;
+		}
+		str[i][j] = '\0';
 		i++;
 	}
-	return (lst);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**str;
+	int		i;
+	int		j;
+	int		k;
+	int		count;
+
+	count = count_word(s, c);
+	i = 0;
+	j = 0;
+	k = 0;
+	str = malloc((count_word(s, c) + 1) * sizeof(char *));
+	if (!str)
+		return (0);
+	while (i < count_word(s, c))
+	{
+		while (s[j] == c && s[j])
+			j++;
+		str[i] = malloc((count_char(s, c, j) + 1) * sizeof(char));
+		j += count_char(s, c, j);
+		i++;
+	}
+	cpy(str, s, c, count);
+	str[i] = 0;
+	return (str);
 }

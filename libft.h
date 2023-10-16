@@ -6,7 +6,7 @@
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:45:28 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/04/05 18:08:30 by oakerkao         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:14:27 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include "get_next_line.h"
+
 typedef struct s_list
 {
 	void			*content;
@@ -55,9 +57,9 @@ int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(int size, ...);
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-t_list	*ft_split(char *str, char c);
+char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -66,6 +68,10 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-char	*get_next_line(int fd);
+// new
+char	*ft_var_strjoin(int size, ...);
+t_list	*ft_linked_split(char *str, char c);
+char	*ft_char_join(char *str, char c);
+char	**ft_list_to_twod(t_list *lst);
 
 #endif

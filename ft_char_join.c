@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_char_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 08:31:55 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/10/16 10:58:06 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/10/16 11:11:03 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/10/16 11:15:35 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char	*ft_char_join(char *str, char c)
 {
-	if (n == -2147483648)
+	char	*result;
+	int		len;
+	int		i;
+
+	i = 0;
+	if (!str)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483648, fd);
+		result = malloc(2);
+		result[0] = c;
+		result[1] = '\0';
+		return (result);
 	}
-	else if (n < 0)
+	len = ft_strlen(str);
+	result = malloc((len + 2) * sizeof(char));
+	while (str[i])
 	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
-		ft_putnbr_fd(n, fd);
+		result[i] = str[i];
+		i++;
 	}
-	else if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-	else
-		ft_putchar_fd(n % 10 + 48, fd);
+	result[i] = c;
+	result[i + 1] = '\0';
+	free(str);
+	return (result);
 }

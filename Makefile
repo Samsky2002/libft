@@ -48,7 +48,11 @@ CFILES = ft_isalpha.c \
 		 ft_lstiter.c \
 		 ft_lstmap.c \
 		 get_next_line.c \
-		 get_next_line_utils.c
+		 get_next_line_utils.c \
+		 ft_var_strjoin.c \
+		 ft_linked_split.c \
+		 ft_char_join.c \
+		 ft_list_to_twod.c
 
 OBJECTS = $(CFILES:.c=.o)
 

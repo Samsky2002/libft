@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_list_to_twod.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oakerkao <oakerkao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 08:31:55 by oakerkao          #+#    #+#             */
-/*   Updated: 2023/10/16 10:58:06 by oakerkao         ###   ########.fr       */
+/*   Created: 2023/10/16 11:12:46 by oakerkao          #+#    #+#             */
+/*   Updated: 2023/10/16 11:15:06 by oakerkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char	**ft_list_to_twod(t_list *lst)
 {
-	if (n == -2147483648)
+	int		len;
+	int		i;
+	char	**arr;
+
+	i = 0;
+	len = ft_lstsize(lst);
+	arr = malloc((len + 1) * sizeof(char *));
+	while (lst)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483648, fd);
+		arr[i] = ft_strdup(lst->content);
+		i++;
+		lst = lst->next;
 	}
-	else if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
-		ft_putnbr_fd(n, fd);
-	}
-	else if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-	else
-		ft_putchar_fd(n % 10 + 48, fd);
+	arr[i] = NULL;
+	return (arr);
 }
